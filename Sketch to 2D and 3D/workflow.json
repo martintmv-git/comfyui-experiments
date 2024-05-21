@@ -1,6 +1,6 @@
 {
-  "last_node_id": 25,
-  "last_link_id": 34,
+  "last_node_id": 27,
+  "last_link_id": 42,
   "nodes": [
     {
       "id": 2,
@@ -14,7 +14,7 @@
         "1": 126
       },
       "flags": {},
-      "order": 8,
+      "order": 5,
       "mode": 0,
       "inputs": [
         {
@@ -70,7 +70,7 @@
         "1": 46
       },
       "flags": {},
-      "order": 14,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
@@ -100,39 +100,6 @@
       }
     },
     {
-      "id": 12,
-      "type": "RemBGSession+",
-      "pos": [
-        1403,
-        2169
-      ],
-      "size": {
-        "0": 315,
-        "1": 82
-      },
-      "flags": {},
-      "order": 0,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "REMBG_SESSION",
-          "type": "REMBG_SESSION",
-          "links": [
-            17
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "RemBGSession+"
-      },
-      "widgets_values": [
-        "u2net: general purpose",
-        "CoreML"
-      ]
-    },
-    {
       "id": 5,
       "type": "CLIPTextEncode",
       "pos": [
@@ -144,7 +111,7 @@
         "1": 200
       },
       "flags": {},
-      "order": 12,
+      "order": 8,
       "mode": 0,
       "inputs": [
         {
@@ -172,127 +139,89 @@
       ]
     },
     {
-      "id": 8,
-      "type": "PreviewImage",
+      "id": 3,
+      "type": "KSampler",
       "pos": [
-        2135,
-        1652
+        1369,
+        1597
       ],
       "size": {
-        "0": 622.400634765625,
-        "1": 666.6343383789062
+        "0": 315,
+        "1": 262
       },
       "flags": {},
-      "order": 17,
+      "order": 10,
       "mode": 0,
       "inputs": [
         {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 13
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
-    },
-    {
-      "id": 14,
-      "type": "PreviewImage",
-      "pos": [
-        2968,
-        2336
-      ],
-      "size": {
-        "0": 699.6116333007812,
-        "1": 709.3997802734375
-      },
-      "flags": {},
-      "order": 19,
-      "mode": 0,
-      "inputs": [
+          "name": "model",
+          "type": "MODEL",
+          "link": 3
+        },
         {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 19
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
-    },
-    {
-      "id": 16,
-      "type": "PreviewImage",
-      "pos": [
-        2254,
-        2656
-      ],
-      "size": {
-        "0": 651.7276000976562,
-        "1": 615.5934448242188
-      },
-      "flags": {},
-      "order": 21,
-      "mode": 0,
-      "inputs": [
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 6
+        },
         {
-          "name": "images",
-          "type": "IMAGE",
-          "link": 21
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "PreviewImage"
-      }
-    },
-    {
-      "id": 21,
-      "type": "TripoSRViewer",
-      "pos": [
-        3925,
-        1980
-      ],
-      "size": [
-        600,
-        500
-      ],
-      "flags": {},
-      "order": 13,
-      "mode": 0,
-      "inputs": [
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 7
+        },
         {
-          "name": "mesh",
-          "type": "MESH",
-          "link": 25
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 10
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "TripoSRViewer"
+        "Node name for S&R": "KSampler"
       },
       "widgets_values": [
-        null
+        415884463236364,
+        "randomize",
+        4,
+        1.3,
+        "dpmpp_2m_sde",
+        "sgm_uniform",
+        0.75
       ]
     },
     {
-      "id": 15,
-      "type": "MaskToImage",
+      "id": 7,
+      "type": "VAEDecode",
       "pos": [
-        1990,
-        2515
+        1722,
+        1929
       ],
       "size": {
         "0": 210,
-        "1": 26
+        "1": 46
       },
       "flags": {},
-      "order": 20,
+      "order": 11,
       "mode": 0,
       "inputs": [
         {
-          "name": "mask",
-          "type": "MASK",
-          "link": 20
+          "name": "samples",
+          "type": "LATENT",
+          "link": 11
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12
         }
       ],
       "outputs": [
@@ -300,75 +229,30 @@
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            21
+            13,
+            18
           ],
           "shape": 3,
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "MaskToImage"
+        "Node name for S&R": "VAEDecode"
       }
-    },
-    {
-      "id": 20,
-      "type": "Note",
-      "pos": [
-        3486,
-        1696
-      ],
-      "size": {
-        "0": 358.7325134277344,
-        "1": 82.71640014648438
-      },
-      "flags": {},
-      "order": 1,
-      "mode": 0,
-      "properties": {
-        "text": ""
-      },
-      "widgets_values": [
-        "resolution is low (128) for real time proof of concept work, changing it to a bigger one is only for \"production ready\" objects"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
-      "id": 24,
-      "type": "Note",
-      "pos": [
-        1748,
-        2480
-      ],
-      "size": {
-        "0": 214.29586791992188,
-        "1": 109.45703887939453
-      },
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "properties": {
-        "text": ""
-      },
-      "widgets_values": [
-        "connect `mask` to `TripoSR Sampler` if you want 3D\n\ndisconnect `image` to `TripoSR Sampler` if you want only 2D"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
     },
     {
       "id": 1,
       "type": "CheckpointLoaderSimple",
       "pos": [
-        32,
-        1676
+        73,
+        1344
       ],
       "size": {
         "0": 315,
         "1": 98
       },
       "flags": {},
-      "order": 3,
+      "order": 0,
       "mode": 0,
       "outputs": [
         {
@@ -408,41 +292,112 @@
       ]
     },
     {
-      "id": 23,
-      "type": "Note",
+      "id": 12,
+      "type": "RemBGSession+",
       "pos": [
-        1730,
-        1756
-      ],
-      "size": {
-        "0": 251.593505859375,
-        "1": 120.99832153320312
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "properties": {
-        "text": ""
-      },
-      "widgets_values": [
-        "connect `image` to `TripoSR Sampler` if you want 3D\n\ndisconnect `image` to `TripoSR Sampler` if you want only 2D"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
-      "id": 18,
-      "type": "TripoSRModelLoader",
-      "pos": [
-        3069,
-        1642
+        1383,
+        2022
       ],
       "size": {
         "0": 315,
         "1": 82
       },
       "flags": {},
-      "order": 5,
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "REMBG_SESSION",
+          "type": "REMBG_SESSION",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RemBGSession+"
+      },
+      "widgets_values": [
+        "u2net: general purpose",
+        "CoreML"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "MaskToImage",
+      "pos": [
+        1552,
+        2364
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            21
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MaskToImage"
+      }
+    },
+    {
+      "id": 8,
+      "type": "PreviewImage",
+      "pos": [
+        2135,
+        1610
+      ],
+      "size": {
+        "0": 507.9127502441406,
+        "1": 556.9450073242188
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 13
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 18,
+      "type": "TripoSRModelLoader",
+      "pos": [
+        2744,
+        1589
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 2,
       "mode": 0,
       "outputs": [
         {
@@ -464,84 +419,220 @@
       ]
     },
     {
-      "id": 3,
-      "type": "KSampler",
+      "id": 19,
+      "type": "TripoSRSampler",
       "pos": [
-        1369,
-        1597
+        3125,
+        1748
       ],
       "size": {
         "0": 315,
-        "1": 262
+        "1": 122
       },
       "flags": {},
-      "order": 15,
+      "order": 16,
       "mode": 0,
       "inputs": [
         {
           "name": "model",
-          "type": "MODEL",
-          "link": 3
+          "type": "TRIPOSR_MODEL",
+          "link": 22
         },
         {
-          "name": "positive",
-          "type": "CONDITIONING",
-          "link": 6
+          "name": "reference_image",
+          "type": "IMAGE",
+          "link": 39
         },
         {
-          "name": "negative",
-          "type": "CONDITIONING",
-          "link": 7
-        },
-        {
-          "name": "latent_image",
-          "type": "LATENT",
-          "link": 10
+          "name": "reference_mask",
+          "type": "MASK",
+          "link": 40
         }
       ],
       "outputs": [
         {
-          "name": "LATENT",
-          "type": "LATENT",
+          "name": "MESH",
+          "type": "MESH",
           "links": [
-            11
+            25
           ],
           "shape": 3,
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "KSampler"
+        "Node name for S&R": "TripoSRSampler"
       },
       "widgets_values": [
-        384034897491293,
-        "randomize",
-        4,
-        1.3,
-        "dpmpp_2m_sde",
-        "sgm_uniform",
-        0.75
+        256,
+        25
+      ]
+    },
+    {
+      "id": 13,
+      "type": "ImageRemoveBackground+",
+      "pos": [
+        1544,
+        2236
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "rembg_session",
+          "type": "REMBG_SESSION",
+          "link": 17
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 18
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            19,
+            39
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            20,
+            40
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageRemoveBackground+"
+      }
+    },
+    {
+      "id": 21,
+      "type": "TripoSRViewer",
+      "pos": [
+        3431,
+        2050
+      ],
+      "size": [
+        600,
+        500
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "MESH",
+          "link": 25
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TripoSRViewer"
+      },
+      "widgets_values": [
+        null
+      ]
+    },
+    {
+      "id": 16,
+      "type": "PreviewImage",
+      "pos": [
+        2117,
+        2255
+      ],
+      "size": {
+        "0": 494.79730224609375,
+        "1": 487.22802734375
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 21
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 9,
+      "type": "PainterNode",
+      "pos": [
+        79,
+        1501
+      ],
+      "size": [
+        718.5535278320312,
+        808.5535278320312
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "title": "PainterNode - 512x512",
+      "properties": {
+        "Node name for S&R": "PainterNode"
+      },
+      "widgets_values": [
+        "Paint_0.png",
+        "clear_painer",
+        null
       ]
     },
     {
       "id": 11,
       "type": "ImageResize+",
       "pos": [
-        608,
-        2276
+        557,
+        1981
       ],
       "size": {
         "0": 315,
         "1": 218
       },
       "flags": {},
-      "order": 10,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
           "name": "image",
           "type": "IMAGE",
-          "link": 34
+          "link": 42
         }
       ],
       "outputs": [
@@ -580,41 +671,29 @@
       ]
     },
     {
-      "id": 25,
-      "type": "LoadImage",
+      "id": 14,
+      "type": "PreviewImage",
       "pos": [
-        -334,
-        2860
+        2682,
+        2057
       ],
       "size": {
-        "0": 695.2916870117188,
-        "1": 630.3353881835938
+        "0": 699.6116333007812,
+        "1": 709.3997802734375
       },
       "flags": {},
-      "order": 6,
+      "order": 14,
       "mode": 0,
-      "outputs": [
+      "inputs": [
         {
-          "name": "IMAGE",
+          "name": "images",
           "type": "IMAGE",
-          "links": [],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": null,
-          "shape": 3
+          "link": 19
         }
       ],
       "properties": {
-        "Node name for S&R": "LoadImage"
-      },
-      "widgets_values": [
-        "Screenshot 2024-04-07 at 20.08.42.png",
-        "image"
-      ]
+        "Node name for S&R": "PreviewImage"
+      }
     },
     {
       "id": 4,
@@ -628,7 +707,7 @@
         "1": 200
       },
       "flags": {},
-      "order": 11,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
@@ -652,171 +731,29 @@
         "Node name for S&R": "CLIPTextEncode"
       },
       "widgets_values": [
-        "game illustration of a bag of gold"
+        "game illustration, lighthouse in the middle of the ocean"
       ]
     },
     {
-      "id": 7,
-      "type": "VAEDecode",
+      "id": 27,
+      "type": "LoadImage",
       "pos": [
-        1722,
-        1929
+        71,
+        1810
       ],
       "size": {
-        "0": 210,
-        "1": 46
+        "0": 421.1371765136719,
+        "1": 397.4779357910156
       },
       "flags": {},
-      "order": 16,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "samples",
-          "type": "LATENT",
-          "link": 11
-        },
-        {
-          "name": "vae",
-          "type": "VAE",
-          "link": 12
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            13,
-            18
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "VAEDecode"
-      }
-    },
-    {
-      "id": 13,
-      "type": "ImageRemoveBackground+",
-      "pos": [
-        1740,
-        2389
-      ],
-      "size": {
-        "0": 241.79998779296875,
-        "1": 46
-      },
-      "flags": {},
-      "order": 18,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "rembg_session",
-          "type": "REMBG_SESSION",
-          "link": 17
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 18
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            19
-          ],
-          "shape": 3,
-          "slot_index": 0
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": [
-            20
-          ],
-          "shape": 3,
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ImageRemoveBackground+"
-      }
-    },
-    {
-      "id": 19,
-      "type": "TripoSRSampler",
-      "pos": [
-        3471,
-        1830
-      ],
-      "size": {
-        "0": 315,
-        "1": 122
-      },
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "TRIPOSR_MODEL",
-          "link": 22
-        },
-        {
-          "name": "reference_image",
-          "type": "IMAGE",
-          "link": null
-        },
-        {
-          "name": "reference_mask",
-          "type": "MASK",
-          "link": null
-        }
-      ],
-      "outputs": [
-        {
-          "name": "MESH",
-          "type": "MESH",
-          "links": [
-            25
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "TripoSRSampler"
-      },
-      "widgets_values": [
-        256,
-        25
-      ]
-    },
-    {
-      "id": 9,
-      "type": "PainterNode",
-      "pos": [
-        -346,
-        1960
-      ],
-      "size": [
-        718.5535278320312,
-        808.5535278320312
-      ],
-      "flags": {},
-      "order": 7,
+      "order": 4,
       "mode": 0,
       "outputs": [
         {
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            34
+            42
           ],
           "shape": 3,
           "slot_index": 0
@@ -828,14 +765,12 @@
           "shape": 3
         }
       ],
-      "title": "PainterNode - 512x512",
       "properties": {
-        "Node name for S&R": "PainterNode"
+        "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        "Paint_0.png",
-        "clear_painer",
-        null
+        "untitled.png",
+        "image"
       ]
     }
   ],
@@ -1001,8 +936,24 @@
       "MESH"
     ],
     [
-      34,
-      9,
+      39,
+      13,
+      0,
+      19,
+      1,
+      "IMAGE"
+    ],
+    [
+      40,
+      13,
+      1,
+      19,
+      2,
+      "MASK"
+    ],
+    [
+      42,
+      27,
       0,
       11,
       0,
